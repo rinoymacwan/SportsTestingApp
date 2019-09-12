@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using DbTrials.Models;
 
 namespace DbTrials
 {
@@ -33,6 +35,9 @@ namespace DbTrials
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<DbTrialsContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DbTrialsContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
